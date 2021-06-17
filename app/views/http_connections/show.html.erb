@@ -1,0 +1,19 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Toggl api:</strong>
+  <%= @http_connection.toggl_api %>
+</p>
+
+<p>
+  <strong>Clockify api:</strong>
+  <%= @http_connection.clockify_api %>
+</p>
+
+<p>
+  <strong>Harvest api:</strong>
+  <%= @http_connection.harvest_api %>
+</p>
+
+<%= link_to 'Edit', edit_http_connection_path(@http_connection) %> |
+<%= link_to 'Back', http_connections_path %>

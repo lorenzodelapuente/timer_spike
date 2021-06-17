@@ -1,0 +1,32 @@
+<%= form_with(model: http_connection) do |form| %>
+  <% if http_connection.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(http_connection.errors.count, "error") %> prohibited this http_connection from being saved:</h2>
+
+      <ul>
+        <% http_connection.errors.each do |error| %>
+          <li><%= error.full_message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= form.label :toggl_api %>
+    <%= form.text_field :toggl_api %>
+  </div>
+
+  <div class="field">
+    <%= form.label :clockify_api %>
+    <%= form.text_field :clockify_api %>
+  </div>
+
+  <div class="field">
+    <%= form.label :harvest_api %>
+    <%= form.text_field :harvest_api %>
+  </div>
+
+  <div class="actions">
+    <%= form.submit %>
+  </div>
+<% end %>

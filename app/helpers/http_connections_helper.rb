@@ -1,0 +1,2 @@
+module HttpConnectionsHelper
+end
