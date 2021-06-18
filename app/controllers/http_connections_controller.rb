@@ -32,30 +32,16 @@ class HttpConnectionsController < ApplicationController
   # POST /http_connections or /http_connections.json
   def create
     @http_connection = HttpConnection.new(http_connection_params)
-    toggl_api = @http_connection.toggl_api
+    toggl_api_key = @http_connection.toggl_api
+    clockify_api_key = @http_connection.clockify_api
+    harvest_api_key = @http_connection.harvest_api
 
-    uri = URI.parse("https://api.track.toggl.com/api/v8/me?with_related_data=true")
-    request = Net::HTTP::Get.new(uri)
-    request.basic_auth(toggl_api, "api_token")
-
-    req_options = {
-      use_ssl: uri.scheme == "https",
-    }
-
-    response = Net::HTTP.start(uri.hostname, uri.port, req_options) do |http|
-      http.request(request)
-    end
-  
-    data = JSON.pretty_generate(JSON.parse(response.body))
-    @http_connection["payload"] = data
-
-    
+    @http_connection["toggl_payload"] = toggl_data_request(toggl_api_key)
 
     respond_to do |format|
       if @http_connection.save
         sql_data = UserDatum.new
-        sql_data.userName = toggl_api
-        sql_data.userData = data
+        sql_data["toggl_data"] = @http_connection["toggl_payload"]
         sql_data.save
         format.html { redirect_to @http_connection, notice: "Http connection was successfully created." }
         format.json { render :show, status: :created, location: @http_connection }
