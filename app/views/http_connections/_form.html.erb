@@ -22,9 +22,15 @@
   </div>
 
   <div class="field">
-    <%= form.label :harvest_api %>
-    <%= form.text_field :harvest_api %>
+    <%= form.label :harvest_account_id %>
+    <%= form.text_field :harvest_account_id %>
   </div>
+
+  <div class="field">
+    <%= form.label :harvest_personal_access_token %>
+    <%= form.text_field :harvest_personal_access_token %>
+  </div>
+
 
   <div class="actions">
     <%= form.submit %>

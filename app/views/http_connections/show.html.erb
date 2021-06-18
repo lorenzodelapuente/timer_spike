@@ -11,9 +11,15 @@
 </p>
 
 <p>
-  <strong>Harvest api:</strong>
-  <%= @http_connection.harvest_api %>
+  <strong>Harvest harvest_personal_access_token:</strong>
+  <%= @http_connection.harvest_personal_access_token %>
 </p>
+
+<p>
+  <strong>Harvest harvest_account_id:</strong>
+  <%= @http_connection.harvest_account_id %>
+</p>
+
 
 <%= link_to 'Edit', edit_http_connection_path(@http_connection) %> |
 <%= link_to 'Back', http_connections_path %>

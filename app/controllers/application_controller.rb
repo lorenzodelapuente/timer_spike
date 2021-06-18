@@ -34,11 +34,10 @@ class ApplicationController < ActionController::Base
     return data
   end
 
-  # 2695702.pt.6vvt55AAO7KoZV2PnqW-KY6HzgJW2PEhm1esfU5AqurUxLAxgDwz_xdO06zGw3LqTZMiieIcLZSA29MuIjg4NQ
-  # "1461373"
-  #Two pieces of data necessary for this api    
+  #Two pieces of data necessary for this api   
+  #ONLY GETS LAST TIME ENTRY
   def harvest_data_request(account_id, personal_access_token)
-    uri = URI.parse("https://api.harvestapp.com/api/v2/users/me.json")
+    uri = URI.parse("https://api.harvestapp.com/api/v2/time_entries?per_page=1&ref=last")
     request = Net::HTTP::Get.new(uri)
     request["Harvest-Account-Id"] = account_id
     request["Authorization"] = "Bearer #{personal_access_token}"
@@ -52,8 +51,8 @@ class ApplicationController < ActionController::Base
       http.request(request)
     end
     
-    puts "HELOOOOOOOOOOOOOOOOOOOOOOOOO"
-    puts response.body  
+    data = JSON.pretty_generate(JSON.parse(response.body))
+    return data
   end
   
 end
