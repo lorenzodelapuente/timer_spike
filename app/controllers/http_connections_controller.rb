@@ -21,7 +21,14 @@ class HttpConnectionsController < ApplicationController
   # GET /http_connections/1/edit
   def edit
   end
-
+#Chron jobs unix (Run script every x amount of time)
+#Use this for my adaptors and gatherin data (Don't miss time, don't be redundant in fetching)
+#pass from mongo to sql also with chronjobs
+#Mongo db tells me when new data is inserted, and then we pass new stuff to sql
+#Mongo and SQL data addition are separate processes
+#Background job the datamigration task using redess? background job is an asynchronous request script checks if theres something
+#deploy to heroku, use scheduker
+#If there is a webhook use it (harder)
   # POST /http_connections or /http_connections.json
   def create
     @http_connection = HttpConnection.new(http_connection_params)
