@@ -34,12 +34,16 @@ class HttpConnectionsController < ApplicationController
     @http_connection = HttpConnection.new(http_connection_params)
     toggl_api_key = @http_connection.toggl_api
     clockify_api_key = @http_connection.clockify_api
-    harvest_api_key = @http_connection.harvest_api
+    harvest_account_id = @http_connection.harvest_account_id
+    harvest_personal_access_token = @http_connection.harvest_personal_access_token
 
     @http_connection["toggl_payload"] = toggl_data_request(toggl_api_key)
+    @http_connection["clockify_payload"] = clockify_data_request(clockify_api_key)
+    @http_connection["harvest_payload"] = harvest_data_request(harvest_account_id, harvest_personal_access_token)
 
     respond_to do |format|
       if @http_connection.save
+        #Do this dumping into the sql database in another method
         sql_data = UserDatum.new
         sql_data["toggl_data"] = @http_connection["toggl_payload"]
         sql_data.save
